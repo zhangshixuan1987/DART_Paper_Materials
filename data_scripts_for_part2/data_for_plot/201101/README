@@ -1,0 +1,19 @@
+The subdirectories here save the data for the following plots:
+
+2d_map_distribution/  
+  save the data for the 2d map of PD-PI over 
+    1. the North pacific region (NOP):
+    2. the globe (Global):
+
+ensemble_spread/
+  save the data for the ensemble spread of selected quantities from 
+    1. PD:
+    2. PI:
+    3. PD-PI:
+ 
+
+
+
+
+
+
