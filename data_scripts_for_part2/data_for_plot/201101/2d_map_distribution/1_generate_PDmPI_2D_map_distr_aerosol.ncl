@@ -90,8 +90,8 @@ begin
   lndcolor = "Grey28"
 
  ;;flags to perform significant test;;;;;;;;
-  l_studentttest    = False ; True if perform student-t test
-  l_pairedttest     = True  ; True if perform parired-t test
+  l_studentttest    = True  ; True if perform student-t test
+  l_pairedttest     = True   ; True if perform parired-t test
   l_kstest          = False  ; True if perform K-S test, see https://www.ncl.ucar.edu/Document/Functions/Built-in/kolsm2_n.shtml
 
  ;;;;open netcdf file and save data for the pfigures;;;;;;;
@@ -100,6 +100,31 @@ begin
   replaceSingleChar(out_file_name, " ", "_")
   system("rm " + out_file_name)
   fout = addfile(out_file_name,"c")
+ ;;;;open netcdf file and save data for the pfigures;;;;;;;
+ setfileoption("nc", "Format",  "NetCDF4")
+ out_file_name = "Global_distribution_10year_mean_cloud_and_cloud_forcing"
+ if(l_studentttest)then
+   if (l_equiv_size) then
+     out_file_name = out_file_name + _studentttest_with_equiv_size.nc"
+   else
+     out_file_name = out_file_name + _studentttest_without_equiv_size.nc"
+   end if
+ end if
+
+ if(l_pairedttest)then
+   if (l_equiv_size) then
+     out_file_name = out_file_name + _pairedttest_with_equiv_size.nc"
+   else
+     out_file_name = out_file_name + _pairedttest_without_equiv_size.nc"
+   end if
+ end if
+
+ if(l_kstest)then
+   out_file_name = out_file_name + _kstest.nc"
+ end if
+
+ system("rm " + out_file_name)
+ fout = addfile(out_file_name,"c")
 
 do iv = 0,nvars-1, 1
 
@@ -120,9 +145,6 @@ do iv = 0,nvars-1, 1
  ;wtype@wkOrientation   = "landscape"    ;;pictures displayed along the length
  ;wtype@wkOrientation   = "landscape"    ;;pictures displayed along the length
   wks1 = gsn_open_wks(wtype,OUTDir+"fig_sensitivity_"+plotFileLabel)
-
- ;;;set up the plot information;;;;
- load "./var_share_colorbar.ncl"
 
  do igp = 0, ngrps-1,1
 
@@ -235,8 +257,8 @@ do iv = 0,nvars-1, 1
     yVar = dim_variance (ytmp)
     xEqv    = equiv_sample_size (xtmp, sigr,0)
     yEqv    = equiv_sample_size (ytmp, sigr,0)
-    xN      = dim_avg_wgt_n(xEqv, wgty, 1, 0)    ; wgty could be gaussian weights
-    yN      = dim_avg_wgt_n(yEqv, wgty, 1, 0)
+    xN      = xEqv ;dim_avg_wgt_n(xEqv, wgty, 1, 0)    ; wgty could be gaussian weights
+    yN      = yEqv ;dim_avg_wgt_n(yEqv, wgty, 1, 0)
     iflag   = False                        ; population variance similar
     prob    = ttest(xAve,xVar,xN, yAve,yVar,yN, iflag, False)
     delete([/xtmp,ytmp,xAve,yAve,xVar,yVar,xEqv,yEqv,xN,yN/])
@@ -264,7 +286,6 @@ do iv = 0,nvars-1, 1
     delete([/xtmp,ytmp,nexpmembers,vdiff,diff_avg,diff_std,allzeros,diff_std_tmp,tval,df,paramA,paramB/])
   end if
 
-
   if (l_kstest) then
     xtmp     = pivar(lat|:,lon|:,ncl_join|:)
     ytmp     = pdvar(lat|:,lon|:,ncl_join|:)
@@ -272,12 +293,26 @@ do iv = 0,nvars-1, 1
     delete([/xtmp,ytmp/])
   end if
 
+  mpdmpi@ = 
+  mpdmpi@ = 
+
+  print(mpistr)
+  print(mpdstr)
+  print(mdfstr)
+
+   if (igp.eq.1)then
+   varorg = Groups(0)+"_"+Varname
+   pncre0300@description = VnmList+" in " + LabList1(0)
+   fout->$varorg$ = pncre0300
+   fout->lat      = lat
+   fout->lon      = lon
+  end if
 
 
-
+ 
   v1mnts1 = mpdmpi 
   v1mnts1 = where(prob.le.sigr,mpdmpi, 32766)
-
+   
   if(plot_ttest_hatrv) then
     v1mnts1 = mpdmpi
     v1mnts1 = where(prob.gt.sigr,mpdmpi, 32766)

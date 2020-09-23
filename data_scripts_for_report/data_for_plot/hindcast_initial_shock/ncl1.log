@@ -1,0 +1,72 @@
+ Copyright (C) 1995-2019 - All Rights Reserved
+ University Corporation for Atmospheric Research
+ NCAR Command Language Version 6.6.2
+ The use of this software is governed by a License Agreement.
+ See http://www.ncl.ucar.edu/ for more details.
+(0)	replaceSingChar: this function has been deprecated.
+(0)	                 Will use str_sub_str.
+(0)	255 31
+
+Variable: obsdat
+Type: float
+Total Size: 1714176 bytes
+            428544 values
+Number of Dimensions: 3
+Dimensions and sizes:	[time | 31] x [lat | 96] x [lon | 144]
+Coordinates: 
+            lat: [ -90..  90]
+            lon: [   0..357.5]
+Number Of Attributes: 1
+  _FillValue :	9.96921e+36
+(0)	255 31
+
+Variable: obsdat
+Type: float
+Total Size: 1714176 bytes
+            428544 values
+Number of Dimensions: 3
+Dimensions and sizes:	[time | 31] x [lat | 96] x [lon | 144]
+Coordinates: 
+            time: [77065..77095]
+            lat: [ -90..  90]
+            lon: [   0..357.5]
+Number Of Attributes: 13
+  cell_measures :	area: area
+  actual_range :	( 78.87619, 392.5756 )
+  dataset :	NOAA Daily OLR TCDR (PSD)
+  missing_value :	-9.99e+08
+  parent_stat :	Individual Obs
+  level_desc :	TOA
+  statistic :	Mean
+  var_desc :	Outgoing Longwave Radiation
+  valid_range :	(   50,  500 )
+  units :	W m-2
+  standard_name :	toa_outgoing_longwave_flux
+  long_name :	outgoing longwave radiation
+  _FillValue :	-9.99e+08
+(0)	255 31
+
+Variable: obsdat
+Type: float
+Total Size: 1714176 bytes
+            428544 values
+Number of Dimensions: 3
+Dimensions and sizes:	[time | 31] x [lat | 96] x [lon | 144]
+Coordinates: 
+            time: [77065..77095]
+            lat: [ -90..  90]
+            lon: [   0..357.5]
+Number Of Attributes: 13
+  cell_measures :	area: area
+  actual_range :	( 78.87619, 392.5756 )
+  dataset :	NOAA Daily OLR TCDR (PSD)
+  missing_value :	-9.99e+08
+  parent_stat :	Individual Obs
+  level_desc :	TOA
+  statistic :	Mean
+  var_desc :	Outgoing Longwave Radiation
+  valid_range :	(   50,  500 )
+  units :	W m-2
+  standard_name :	toa_outgoing_longwave_flux
+  long_name :	outgoing longwave radiation
+  _FillValue :	-9.99e+08
